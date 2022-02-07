@@ -13,11 +13,8 @@ class UserController {
     }
 
     onEdit(){
-
-        document.querySelector("#box-user-update .btn-cancel").addEventListener("click", e=>{
-
+        document.querySelector("#box-user-update .btn-cancel").addEventListener("click", e => {
             this.showPanelCreate();
-
         });
 
         this.formUpdateEl.addEventListener("submit", event => {
@@ -51,18 +48,17 @@ class UserController {
 
                     user.loadFromJSON(result);
 
-                    user.save();
-
-                    this.getTr(user, tr);
-
-                    this.updateCount();
-
-                    this.formUpdateEl.reset();
-
-                    btn.disabled = false;
-
-                    this.showPanelCreate();
-
+                    user.save().then(user => {
+                        this.getTr(user, tr);
+    
+                        this.updateCount();
+    
+                        this.formUpdateEl.reset();
+    
+                        btn.disabled = false;
+    
+                        this.showPanelCreate();
+                    });
                 },
                 (e) => {
                     console.error(e);
@@ -90,14 +86,13 @@ class UserController {
                     
                     values.photo = content;
 
-                    values.save();
-
-                    this.addLine(values);
-
-                    this.formEl.reset();
-
-                    btn.disabled = false;
-
+                    values.save().then(user => {
+                        this.addLine(user);
+    
+                        this.formEl.reset();
+    
+                        btn.disabled = false;
+                    });
                 }, 
                 (e) => {
                     console.error(e);
