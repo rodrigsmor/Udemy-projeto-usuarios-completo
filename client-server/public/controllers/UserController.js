@@ -68,9 +68,7 @@ class UserController {
                     console.error(e);
                 }
             );
-
         });
-
     }
 
     onSubmit(){
@@ -105,9 +103,7 @@ class UserController {
                     console.error(e);
                 }
             );
-
         });
-
     }
 
     getPhoto(formEl){
@@ -198,19 +194,29 @@ class UserController {
     }
 
     selectAll(){
+        let ajax = new XMLHttpRequest();
+        
+        ajax.open('GET', '/users');
 
-        let users = User.getUsersStorage();
+        ajax.onload = event => {
+            let obj = { users : [] }
 
-        users.forEach(dataUser=>{
+            try {
+                obj = JSON.parse(ajax.responseText);
+            } catch(e) {
+                console.log(e);
+            }
+        
+            obj.users.forEach(dataUser => {
+                let user = new User();
+    
+                user.loadFromJSON(dataUser);
 
-            let user = new User();
+                this.addLine(user);
+            });
+        }
 
-            user.loadFromJSON(dataUser);
-
-            this.addLine(user);
-
-        });
-
+        ajax.send();
     }
 
     addLine(dataUser) {
