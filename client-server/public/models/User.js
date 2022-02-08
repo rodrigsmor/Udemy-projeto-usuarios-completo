@@ -1,7 +1,6 @@
 class User {
 
     constructor(name, gender, birth, country, email, password, photo, admin){
-
         this._id;
         this._name = name;
         this._gender = gender;
@@ -12,7 +11,6 @@ class User {
         this._photo = photo;
         this._admin = admin;
         this._register = new Date();
-
     }
 
     get id(){
