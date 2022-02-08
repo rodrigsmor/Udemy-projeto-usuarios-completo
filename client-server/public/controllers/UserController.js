@@ -68,7 +68,6 @@ class UserController {
     }
 
     onSubmit(){
-
         this.formEl.addEventListener("submit", event => {
 
             event.preventDefault();

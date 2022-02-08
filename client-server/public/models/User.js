@@ -69,26 +69,18 @@ class User {
                 break;
                 default:
                     if(name.substring(0, 1) == '_') this[name] = json[name];
-
             }
-            
-
         }
-
     }
 
     static getUsersStorage() {
-
         let users = [];
 
         if (localStorage.getItem("users")) {
-
             users = JSON.parse(localStorage.getItem("users"));
-
         }
 
         return users;
-
     }
 
     getNewID(){
@@ -116,7 +108,7 @@ class User {
     }
 
     save() {
-        new Promise((resolve, reject) => {
+        return new Promise((resolve, reject) => {
             let promise;
     
             if(this.id) {
